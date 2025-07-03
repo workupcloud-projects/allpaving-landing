@@ -11,16 +11,21 @@ const navigationItems = [
     name: "Services", 
     href: "#services",
     dropdown: [
-      "Asphalt Paving",
+      "Asphalt Services",
       "Concrete Services", 
       "Sealcoating & Striping",
       "ADA Compliance",
       "Drainage Solutions",
-      "Parking Lot Design"
+      "Parking Lot & Property Maintenance"
     ]
   },
   { name: "Locations", href: "#locations" },
 ]
+
+// Helper function to create URL-friendly IDs (same as in CoreServices)
+const createServiceId = (category: string) => {
+  return category.toLowerCase().replace(/\s+/g, '-').replace(/[&]/g, 'and')
+}
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -48,7 +53,7 @@ export function Navbar() {
                   <DropdownMenuContent align="start" className="w-56">
                     {item.dropdown.map((subItem) => (
                       <DropdownMenuItem key={subItem} className="cursor-pointer">
-                        <a href={`#${subItem.toLowerCase().replace(/\s+/g, '-')}`} className="w-full">
+                        <a href={`#${createServiceId(subItem)}`} className="w-full">
                           {subItem}
                         </a>
                       </DropdownMenuItem>
@@ -96,7 +101,7 @@ export function Navbar() {
                             {item.dropdown.map((subItem) => (
                               <a
                                 key={subItem}
-                                href={`#${subItem.toLowerCase().replace(/\s+/g, '-')}`}
+                                href={`#${createServiceId(subItem)}`}
                                 className="block text-muted-foreground hover:text-primary transition-colors duration-200"
                                 onClick={() => setIsOpen(false)}
                               >

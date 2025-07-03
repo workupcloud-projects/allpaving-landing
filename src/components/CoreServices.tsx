@@ -125,6 +125,11 @@ const servicesData: ServiceCategory[] = [
   }
 ]
 
+// Helper function to create URL-friendly IDs
+const createServiceId = (category: string) => {
+  return category.toLowerCase().replace(/\s+/g, '-').replace(/[&]/g, 'and')
+}
+
 export function CoreServices() {
   return (
     <section id="services" className="py-16 bg-muted/30 sm:py-20 lg:py-24">
@@ -140,7 +145,7 @@ export function CoreServices() {
         {/* Services Grid */}
         <div className="grid gap-8 sm:gap-10 lg:gap-12">
           {servicesData.map((category, categoryIndex) => (
-            <div key={categoryIndex} className="bg-background rounded-lg border border-border p-6 sm:p-8">
+            <div key={categoryIndex} id={createServiceId(category.category)} className="bg-background rounded-lg border border-border p-6 sm:p-8">
               {/* Category Header */}
               <h3 className="text-xl font-bold text-foreground mb-6 sm:text-2xl lg:text-2xl">
                 {category.category}
